@@ -1,6 +1,6 @@
 /* eslint-disable no-undef */
-import axios from 'axios'
 
+import axios from 'axios'
 
 
 const authParams = {
