@@ -1,6 +1,5 @@
 import React from 'react'
 import RecordSpinner from '../components/RecordSpinner'
-import Album from '../components/Album'
 import { Link } from 'react-router-dom'
 
 const HomeScreen = () => {
@@ -22,7 +21,6 @@ const HomeScreen = () => {
           </Link>
         </div>
       </div>
-      <Album />
     </div>
   )
 }

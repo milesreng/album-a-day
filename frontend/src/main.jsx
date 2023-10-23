@@ -11,12 +11,14 @@ import './index.css'
 
 import HomeScreen from './screens/HomeScreen.jsx'
 import SearchScreen from './screens/SearchScreen.jsx'
+import FindAlbumScreen from './screens/findAlbumScreen.jsx'
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path='/' element={<App />}>
       <Route index={true} path='/' element={<HomeScreen />} />
       <Route index={true} path='/search' element={<SearchScreen />} />
+      <Route index={true} path='/album' element={<FindAlbumScreen />} />
     </Route>
   )
 )

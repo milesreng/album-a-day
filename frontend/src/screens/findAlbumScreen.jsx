@@ -1,6 +1,5 @@
 import React from 'react'
 import { useState, useEffect } from 'react'
-import { Link } from 'react-router-dom'
 import Album from '../components/Album'
 import AlbumTile from '../components/AlbumTile'
 import { FaBorderAll, FaList, FaSearch } from 'react-icons/fa'
@@ -8,7 +7,7 @@ import { FaBorderAll, FaList, FaSearch } from 'react-icons/fa'
 const CLIENT_ID = import.meta.env.VITE_SPOTIFY_CLIENT_ID
 const CLIENT_SECRET = import.meta.env.VITE_SPOTIFY_CLIENT_SECRET
 
-const SearchScreen = () => {
+const FindAlbumScreen = () => {
   const [accessToken, setAccessToken] = useState('')
   const [search, setSearch] = useState('')
   const [tileLayout, setTileLayout] = useState(true)
@@ -42,20 +41,20 @@ const SearchScreen = () => {
         'Authorization': 'Bearer ' + accessToken
       }
     }
-    const artistID = await fetch(`https://api.spotify.com/v1/search?q=${search}&type=artist`, searchParameters)
+    const albumID = await fetch(`https://api.spotify.com/v1/search?q=${search}&type=album`, searchParameters)
       .then(response => response.json())
       .then(data => { 
-        return data.artists.items[0].id
+        setAlbums(data.albums.items)
       })
 
-    console.log(`artist ID is ${artistID}`)
-    // GET all albums w/ artist ID
+    // console.log(`artist ID is ${albumId}`)
+    // // GET all albums w/ artist ID
 
-    const retAlbums = await fetch(`https://api.spotify.com/v1/artists/${artistID}/albums?&include_groups=album&market=US&limit=50`, searchParameters)
-      .then(response => response.json())
-      .then(data => {
-        setAlbums(data.items)
-      })
+    // const retAlbums = await fetch(`https://api.spotify.com/v1/artists/${artistID}/albums?&include_groups=album&market=US&limit=50`, searchParameters)
+    //   .then(response => response.json())
+    //   .then(data => {
+    //     setAlbums(data.items)
+    //   })
 
     setSearch('')
   }
@@ -76,16 +75,10 @@ const SearchScreen = () => {
 
   return (
     <div className='flex flex-col w-full bg-gunmetal-900 min-h-screen'>
-      <div className='p-4'>
-      <Link to='/'
-        className='text-default-bg font-content underline hover:text-gunmetal-100 transition-all duration-400 text-sm md:text-md'>
-        back to home
-        </Link>
-    </div>
       <div className='w-11/12 md:w-3/4 flex-col flex mx-auto'>
         <div className='w-full md:w-11/12 flex flex-row mx-auto justify-around pt-2 md:pt-12 font-content pb-6 md:pb-0'>
           <input type='text' 
-            placeholder='search for an artist...' 
+            placeholder='search for an album...' 
             onChange={handleSearchChange}
             onKeyDown={handleKeyDown}
             value={search}
@@ -121,7 +114,7 @@ const SearchScreen = () => {
                 </div>
         </div>
         <div className={`flex justify-around gap-4 w-full ${tileLayout ? 'flex-wrap' : 'flex-col'}`}>
-         { albums.map((album, i) => {
+         { albums && albums.map((album, i) => {
             if (tileLayout) {
               return (<AlbumTile key={i} album={album} />)
             } else {
@@ -136,4 +129,4 @@ const SearchScreen = () => {
   )
 }
 
-export default SearchScreen
+export default FindAlbumScreen
