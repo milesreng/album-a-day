@@ -4,8 +4,8 @@ import { FaUser } from 'react-icons/fa'
 const Header
  = () => {
   return (
-    <div>
-      
+    <div className='w-full border-b border-gunmetal-300'>
+      Header
     </div>
   )
 }

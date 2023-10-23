@@ -76,9 +76,9 @@ export default {
       black: colors.black
     },
     fontFamily: {
-      'sans': ['Josefin Sans', 'sans'],
-      'cardo': ['Cardo', 'sans-serif'],
-      'mono': ['mono']
+      'mono': ['mono'],
+      'header': ['Fjalla One', 'sans'],
+      'content': ['Source Sans 3', 'sans']
     },
     extend: {},
   },
