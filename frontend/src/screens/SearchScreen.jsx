@@ -78,7 +78,7 @@ const SearchScreen = () => {
       <div className='w-11/12 md:w-3/4 flex-col flex mx-auto '>
         <div className='w-full md:w-11/12 flex flex-row mx-auto justify-around pt-2 md:pt-12 font-content'>
           <input type='text' 
-            placeholder='search for artist' 
+            placeholder='search for an artist...' 
             onChange={handleSearchChange}
             onKeyDown={handleKeyDown}
             value={search}

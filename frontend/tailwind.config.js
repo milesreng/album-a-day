@@ -78,7 +78,7 @@ export default {
     fontFamily: {
       'mono': ['mono'],
       'header': ['Fjalla One', 'sans'],
-      'content': ['Source Sans 3', 'sans']
+      'content': ['Rubik', 'serif']
     },
     extend: {},
   },
