@@ -68,19 +68,18 @@ export default {
         800: '#ab8b6c',
         900: '#a38160'
       },
-      'merino': {
-        DEFAULT: '#f5ece5'
-      },
+      'spotify-green': '#1ED760',
       slate: colors.slate,
       gray: colors.gray,
       black: colors.black
     },
-    fontFamily: {
-      'mono': ['mono'],
-      'header': ['Barlow', 'sans'],
-      'content': ['Rubik', 'serif']
+    extend: {
+      fontFamily: {
+        'mono': ['mono'],
+        'header': ['Bebas Neue', 'sans'],
+        'content': ['Rubik', 'serif']
+      },
     },
-    extend: {},
   },
   plugins: [],
 }

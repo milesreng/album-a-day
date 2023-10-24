@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React from 'react'
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
@@ -7,6 +8,8 @@ import { FaBorderAll, FaList, FaSearch } from 'react-icons/fa'
 
 const CLIENT_ID = import.meta.env.VITE_SPOTIFY_CLIENT_ID
 const CLIENT_SECRET = import.meta.env.VITE_SPOTIFY_CLIENT_SECRET
+
+
 
 const SearchScreen = () => {
   const [accessToken, setAccessToken] = useState('')
@@ -83,15 +86,21 @@ const SearchScreen = () => {
         </Link>
     </div>
       <div className='w-11/12 md:w-3/4 flex-col flex mx-auto'>
-        <div className='w-full md:w-11/12 flex flex-row mx-auto justify-around pt-2 md:pt-12 font-content pb-6 md:pb-0'>
+        <div className='w-full md:w-11/12 flex flex-row mx-auto justify-around pt-2 md:pt-12 font-content pb-6 md:pb-0 h-20'>
+            {/* <select className='basis-1/6 text-gunmetal bg-default-bg'>
+              <option>Artist</option>
+              <option>Album</option>
+              <option>Track</option>
+
+            </select> */}
           <input type='text' 
             placeholder='search for an artist...' 
             onChange={handleSearchChange}
             onKeyDown={handleKeyDown}
             value={search}
-            className='basis-11/12 rounded-l-md p-1 my-auto text-gunmetal-900 pl-2' />
+            className='my-auto text-gunmetal-900 basis-11/12 pl-4 rounded-l-md h-full' />
           <button onClick={handleSearch}
-            className='font-content bg-default-bg basis-1/12 text-center px-2 text-gunmetal-900 rounded-r-md py-auto hover:bg-gunmetal-50 transition-colors duration-400'>
+            className='font-content bg-default-bg text-center basis-1/12 px-2 text-gunmetal-900 rounded-r-md hover:bg-gunmetal-50 transition-colors duration-400'>
             <FaSearch className='mx-auto' />
           </button>
         </div>
