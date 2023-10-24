@@ -1,44 +1,68 @@
-const express = require('express')
-const querystring = require('querystring')
-const axios = require('axios')
-const cookieParser = require('cookie-parser')
 require('dotenv').config()
+const express = require('express')
 
-const CLIENT_ID = process.env.SPOTIFY_CLIENT_ID
-const CLIENT_SECRET = process.env.SPOTIFY_CLIENT_SECRET
-const REDIRECT_URI = process.env.REDIRECT_URI
-const BASE64_ENCODED = process.env.BASE64_ENCODED
-
+const spotifyWebApi = require('spotify-web-api-node')
+const cors = require('cors')
 
 const app = express()
 
-app.get('/', (request, response) => {
-  const scope = 'user-read-private user-read-email'
+app.use(cors())
+app.use(express.json())
 
-  response.send(
-    '<a href=\'https://accounts.spotify.com/authorize?' +
-    querystring.stringify({
-      response_type: 'code',
-      client_id: CLIENT_ID,
-      scope: scope,
-      redirect_uri: REDIRECT_URI
-    }) + '\'>Sign in</a>')
-})
+const PORT = process.env.PORT || 9000
 
-app.get('/callback', async (request, response) => {
-  const spotifyResponse = await axios.post('https://accounts.spotify.com/api/token', querystring.stringify({
-    grant_type: 'authorization_code',
-    code: request.query.code,
-    redirect_uri: REDIRECT_URI
-  }),
-  {
-    headers: {
-      Authorization: 'Basic ' + BASE64_ENCODED,
-      'Content-Type': 'application/x-www-form-urlencoded'
-    }
+const credentials = {
+  clientID: process.env.SPOTIFY_CLIENT_ID,
+  idSecret: process.env.BASE64_ENCODED,
+  redirectURI: process.env.DEV_REDIRECT_URI
+}
+
+// app.get('/', (request, response) => {
+//   console.log('hello world')
+// })
+
+app.post('/refresh', (request, response) => {
+  const refreshToken = request.body.refreshToken
+  // console.log("Hii");
+  let spotifyApi = new spotifyWebApi({
+    clientId: process.env.SPOTIFY_CLIENT_ID,
+    clientSecret: process.env.SPOTIFY_CLIENT_SECRET,
+    redirectUri: process.env.REDIRECT_URI,
+    refreshToken,
   })
-  response.send(JSON.stringify(spotifyResponse.data))
+
+  spotifyApi
+    .refreshAccessToken()
+    .then((data) => {
+      // console.log(data.body);
+      response.json({
+        accessToken: data.body.access_token,
+        expiresIn: data.body.expires_in,
+      })
+
+    })
+    .catch((err) => {
+      console.log(err)
+      response.sendStatus(400)
+    })
 })
 
-const PORT = 3001
-app.listen(PORT, () => console.log(`console running on PORT ${PORT}`))
+app.post('/login', ((request, response) => {
+  var spotifyAPI = new spotifyWebApi(credentials)
+  const code = request.body.code
+
+  spotifyAPI.authorizationCodeGrant(code).then((data) => {
+    response.json({
+      accessToken: data.body.access_token,
+      refreshToken : data.body.refresh_token,
+      expiresIn : data.body.expires_in
+    })
+  }).catch(error => {
+    console.log(error)
+    response.sendStatus(400)
+  })
+}))
+
+app.listen(PORT, () => {
+  console.log(`app listening on PORT ${PORT}`)
+})
