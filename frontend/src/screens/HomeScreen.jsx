@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react'
 import RecordSpinner from '../components/RecordSpinner'
 import querystring from 'querystring'
 
+import Wrapped from '../components/Wrapped'
 import Dashboard from '../components/Dashboard'
 
 const HomeScreen = () => {
@@ -41,14 +42,14 @@ const HomeScreen = () => {
   }
 
   return (
-    <div className='w-full flex flex-col justify-around h-full text-center font-content'>
+    <div className='w-full flex flex-col justify-around h-full text-center font-content pb-8'>
       <div className='h-full flex flex-col justify-center gap-12 text-gunmetal-50'>
         {!accessToken && (
           <>
           <RecordSpinner />
           <div className='flex flex-col gap-4'>
             <h1 className='text-6xl font-header uppercase'>Spotify-Wrapped-Preview</h1>
-            <div className='flex flex-row w-full justify-center gap-8 md:gap-24 text-lg py-4 font-header'>
+            <div className='flex flex-row w-full justify-center gap-8 md:gap-24 text-lg py-4 font-header bg-gunmetal-900'>
               <button className=' rounded-md border-2 font-content bg-spotify-green border-gunmetal-900 hover:font-bold text-gunmetal-900 lowercase px-8 py-2 shadow-lg text-center transition-colors duration-300'>
                 <a href={loginUrl}>
                   Login with Spotify
@@ -59,15 +60,22 @@ const HomeScreen = () => {
           </>
         )}
         {accessToken && (
-          <div className='flex flex-col h-full justify-between'>
-            <Dashboard token={accessToken} />
-            <button className='bg-spotify-green text-default-bg w-1/6 rounded-full mx-auto mb-8 py-2 uppercase'
+          <div className='flex flex-col h-full bg-gunmetal justify-between'>
+            <Wrapped token={accessToken} />
+            {/* <Dashboard token={accessToken} className='bg-gunmetal' /> */}
+            {/* <button className='bg-spotify-green text-default-bg w-1/6 rounded-full mx-auto my-8 py-2 uppercase'
               onClick={logout}>
                 Logout
-            </button>
+            </button> */}
           </div>
         )}
       </div>
+        {accessToken && (
+          <div className='bg-gunmetal pt-2 pb-8'>
+            <button className='bg-spotify-green px-8 py-1 rounded-full uppercase'
+              onClick={logout}>Logout</button>
+          </div>
+        )}
     </div>
   )
 }
