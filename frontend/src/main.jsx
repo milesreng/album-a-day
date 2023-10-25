@@ -10,11 +10,13 @@ import App from './App.jsx'
 import './index.css'
 
 import HomeScreen from './screens/HomeScreen.jsx'
+import WrappedScreen from './screens/WrappedScreen.jsx'
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path='/' element={<App />}>
       <Route index={true} path='/' element={<HomeScreen />} />
+      <Route index={true} path='/dashboard' element={<WrappedScreen />} />
     </Route>
   )
 )

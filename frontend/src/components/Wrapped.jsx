@@ -6,7 +6,6 @@ import Header from './Header'
 import PreviewWrapped from './PreviewWrapped'
 import TracksWrapped from './TracksWrapped'
 import ArtistsWrapped from './ArtistsWrapped'
-import GenresWrapped from './GenresWrapped'
 
 const Wrapped = (props) => {
   const [user, setUser] = useState()
@@ -46,10 +45,6 @@ const Wrapped = (props) => {
   const handleViewArtists = () => {
     setWrappedType('artists')
   } 
-  
-  const handleViewGenres = () => {
-    setWrappedType('genres')
-  }
 
   const handleViewShort = () => {
     setTimeRange('short')
@@ -89,15 +84,15 @@ const Wrapped = (props) => {
       {(wrappedType && wrappedType !== 'preview') && (
       <div className='w-5/6 md:w-2/3 mx-auto flex flex-row justify-between text-xs md:text-md'>
         <button onClick={handleViewShort}
-          className={`px-8 md:px-16 py-1 ${timeRange === 'short' ? 'bg-gunmetal-700' : 'bg-gunmetal'}`}>
+          className={`px-4 md:px-16 py-1 ${timeRange === 'short' ? 'bg-gunmetal-700' : 'bg-gunmetal'}`}>
           last 4 weeks
         </button>
         <button onClick={handleViewMid}
-          className={`px-8 md:px-16 ${timeRange === 'medium' ? 'bg-gunmetal-700' : 'bg-gunmetal'}`}>
+          className={`px-4 md:px-16 ${timeRange === 'medium' ? 'bg-gunmetal-700' : 'bg-gunmetal'}`}>
           last 6 months
         </button>
         <button onClick={handleViewLong}
-          className={`px-8 md:px-16 ${timeRange === 'long' ? 'bg-gunmetal-700' : 'bg-gunmetal '}`}>
+          className={`px-4 md:px-16 ${timeRange === 'long' ? 'bg-gunmetal-700' : 'bg-gunmetal '}`}>
           all time
         </button>
       </div>)}
@@ -106,7 +101,6 @@ const Wrapped = (props) => {
         {(!wrappedType || wrappedType === 'preview') && user && <PreviewWrapped token={access_token} user={user} />}
         {wrappedType === 'tracks' && <TracksWrapped token={access_token} time_range={timeRange} />}
         {wrappedType === 'artists' && <ArtistsWrapped token={access_token} time_range={timeRange} />}
-        {wrappedType === 'genres' && <GenresWrapped token={access_token} time_range={timeRange} />}
       </div>
     </div>
   )
