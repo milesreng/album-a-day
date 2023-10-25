@@ -42,13 +42,13 @@ const HomeScreen = () => {
   }
 
   return (
-    <div className='w-full flex flex-col justify-around h-full text-center font-content pb-8'>
+    <div className='w-full flex flex-col justify-around min-h-screen text-center font-content pb-8'>
       <div className='h-full flex flex-col justify-center gap-12 text-gunmetal-50'>
         {!accessToken && (
           <>
           <RecordSpinner />
           <div className='flex flex-col gap-4'>
-            <h1 className='text-6xl font-header uppercase'>Spotify-Wrapped-Preview</h1>
+            <h1 className='text-6xl font-header uppercase w-11/12 mx-auto md:w-full'>Spotify-Wrapped-Preview</h1>
             <div className='flex flex-row w-full justify-center gap-8 md:gap-24 text-lg py-4 font-header bg-gunmetal-900'>
               <button className=' rounded-md border-2 font-content bg-spotify-green border-gunmetal-900 hover:font-bold text-gunmetal-900 lowercase px-8 py-2 shadow-lg text-center transition-colors duration-300'>
                 <a href={loginUrl}>
