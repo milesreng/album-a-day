@@ -1,67 +1,33 @@
-require('dotenv').config()
 const express = require('express')
-
-const spotifyWebApi = require('spotify-web-api-node')
-const cors = require('cors')
-
-const app = express()
-
-app.use(cors())
-app.use(express.json())
+const bodyParser = require('body-parser')
+const cookieParser = require('cookie-parser')
+const path = require('path')
+const logger = require('morgan')
+const authRoutes = require('./routes')
 
 const PORT = process.env.PORT || 9000
+const app = express()
 
-const credentials = {
-  clientID: process.env.SPOTIFY_CLIENT_ID,
-  idSecret: process.env.BASE64_ENCODED,
-  redirectURI: process.env.DEV_REDIRECT_URI
+if (process.env.NODE_ENV !== 'production') {
+  console.log('using webpack')
+
+  const webpack = require('webpack')
+  const webpackDevMiddleware = require('webpack-dev-middleware')
+  const webpackHotMiddleware = require('webpack-hot-middleware')
+  const config = require('../webpack/dev.config')
+
+  // setup middleware
+  const compiler = webpack(config)
+  app.use(webpackDevMiddleware(compiler, { noInfo: true, publicPath: config.output.publicPath }))
+  app.use(webpackHotMiddleware(compiler))
 }
 
-// app.get('/', (request, response) => {
-//   console.log('hello world')
-// })
-
-app.post('/refresh', (request, response) => {
-  const refreshToken = request.body.refreshToken
-  // console.log("Hii");
-  let spotifyApi = new spotifyWebApi({
-    clientId: process.env.SPOTIFY_CLIENT_ID,
-    clientSecret: process.env.SPOTIFY_CLIENT_SECRET,
-    redirectUri: process.env.REDIRECT_URI,
-    refreshToken,
-  })
-
-  spotifyApi
-    .refreshAccessToken()
-    .then((data) => {
-      // console.log(data.body);
-      response.json({
-        accessToken: data.body.access_token,
-        expiresIn: data.body.expires_in,
-      })
-
-    })
-    .catch((err) => {
-      console.log(err)
-      response.sendStatus(400)
-    })
-})
-
-app.post('/login', ((request, response) => {
-  var spotifyAPI = new spotifyWebApi(credentials)
-  const code = request.body.code
-
-  spotifyAPI.authorizationCodeGrant(code).then((data) => {
-    response.json({
-      accessToken: data.body.access_token,
-      refreshToken : data.body.refresh_token,
-      expiresIn : data.body.expires_in
-    })
-  }).catch(error => {
-    console.log(error)
-    response.sendStatus(400)
-  })
-}))
+app.use(logger('dev'))
+app.use(cookieParser())
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: false }))
+app.use(express.static(path.resolve(__dirname, '../public')))
+app.use('/', authRoutes)
 
 app.listen(PORT, () => {
   console.log(`app listening on PORT ${PORT}`)
