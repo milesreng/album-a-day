@@ -3,12 +3,9 @@ import { useState, useEffect } from 'react'
 import RecordSpinner from '../components/RecordSpinner'
 import querystring from 'querystring'
 
-import Wrapped from '../components/Wrapped'
-import Dashboard from '../components/Dashboard'
-
 const HomeScreen = () => {
   const CLIENT_ID = import.meta.env.VITE_SPOTIFY_CLIENT_ID
-  const REDIRECT_URI = import.meta.env.VITE_REDIRECT_URI
+  const REDIRECT_URI = import.meta.env.VITE_DEV_REDIRECT_URI
   const AUTH_ENDPOINT = import.meta.env.VITE_AUTH_ENDPOINT
 
   const scope = 'streaming user-read-email user-read-private user-top-read'
@@ -22,23 +19,33 @@ const HomeScreen = () => {
   })
 
   const [accessToken, setAccessToken] = useState()
+  const [refreshToken, setRefreshToken] = useState()
 
   useEffect(() => {
+    // const prep = async () => await logout()
+    // prep()
+
     const hash = window.location.hash
-    var token = window.localStorage.getItem('token')
+    var access_token = window.localStorage.getItem('access_token')
+    var refresh_token = window.localStorage.getItem('refresh_token')
 
     if (hash && hash) {
-      token = hash.substring(1).split('&').find(elem => elem.startsWith('access_token')).split('=')[1]
+      console.log(hash)
+      access_token = hash.substring(1).split('&').find(elem => elem.startsWith('access_token')).split('=')[1]
+      refresh_token = hash.substring(1).split('&').find(elem => elem.startsWith('refresh_token')).split('=')[1]
+
       window.location.hash = ''
-      window.localStorage.setItem('token', token)
+      window.localStorage.setItem('access_token', access_token)
+      window.localStorage.setItem('refresh_token', refresh_token)
     }
 
-    setAccessToken(token)
+    setAccessToken(access_token)
+    setRefreshToken(refresh_token)
   }, [])
 
   const logout = () => {
     setAccessToken('')
-    window.localStorage.removeItem('token')
+    // window.localStorage.removeItem('token')
   }
 
   return (
@@ -61,7 +68,7 @@ const HomeScreen = () => {
         )}
         {accessToken && (
           <div className='flex flex-col h-full bg-gunmetal justify-between'>
-            <Wrapped token={accessToken} />
+            {/* <Wrapped token={accessToken} /> */}
             {/* <Dashboard token={accessToken} className='bg-gunmetal' /> */}
             {/* <button className='bg-spotify-green text-default-bg w-1/6 rounded-full mx-auto my-8 py-2 uppercase'
               onClick={logout}>
@@ -71,7 +78,7 @@ const HomeScreen = () => {
         )}
       </div>
         {accessToken && (
-          <div className='bg-gunmetal pt-2 pb-8'>
+          <div className='bg-gunmetal py-8'>
             <button className='bg-spotify-green px-8 py-1 rounded-full uppercase'
               onClick={logout}>Logout</button>
           </div>
