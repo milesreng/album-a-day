@@ -10,5 +10,5 @@ export const loginURL = auth_endpoint +
     response_type: 'code',
     client_id: CLIENT_ID,
     scope: scope,
-    redirect_uri: 'http://localhost:5173/api/dashboard'
+    redirect_uri: 'http://localhost:5173/dashboard'
   })
