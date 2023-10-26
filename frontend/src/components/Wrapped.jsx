@@ -99,7 +99,7 @@ const Wrapped = (props) => {
       <div>
         {/* <h1 className='text-lg pb-2'>Your top artist this year is:</h1> */}
         {(!wrappedType || wrappedType === 'preview') && user && <PreviewWrapped token={access_token} user={user} />}
-        {wrappedType === 'tracks' && <TracksWrapped token={access_token} time_range={timeRange} />}
+        {wrappedType === 'tracks' &&  <TracksWrapped token={access_token} time_range={timeRange} />}
         {wrappedType === 'artists' && <ArtistsWrapped token={access_token} time_range={timeRange} />}
       </div>
     </div>

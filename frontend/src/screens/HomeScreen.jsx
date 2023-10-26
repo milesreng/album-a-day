@@ -1,8 +1,6 @@
 import React from 'react'
 import { useState, useEffect } from 'react'
 import RecordSpinner from '../components/RecordSpinner'
-import Wrapped from '../components/Wrapped'
-import querystring from 'querystring'
 import { generateRandomString, sha256, base64encode } from '../services/pkceFunctions'
 
 const codeVerifier  = generateRandomString(64)
@@ -11,7 +9,7 @@ const codeChallenge = base64encode(hashed)
 
 const HomeScreen = () => {
   const CLIENT_ID = import.meta.env.VITE_SPOTIFY_CLIENT_ID
-  const REDIRECT_URI = import.meta.env.VITE_DEV_REDIRECT_URI
+  const REDIRECT_URI = import.meta.env.VITE_REDIRECT_URI
   const auth_url = new URL(import.meta.env.VITE_AUTH_ENDPOINT)
 
   const scope = 'streaming user-read-email user-read-private user-top-read'

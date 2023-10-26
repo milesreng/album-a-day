@@ -14,7 +14,7 @@ const WrappedScreen = () => {
  
   const CLIENT_ID = import.meta.env.VITE_SPOTIFY_CLIENT_ID
   const CLIENT_SECRET = import.meta.env.VITE_SPOTIFY_CLIENT_SECRET
-  const REDIRECT_URI = import.meta.env.VITE_DEV_REDIRECT_URI
+  const REDIRECT_URI = import.meta.env.VITE_REDIRECT_URI
   const HOUR_MS = 60000 * 60
 
   useEffect(() => {
@@ -40,8 +40,7 @@ const WrappedScreen = () => {
         })
       }
 
-      const body = await fetch('https://accounts.spotify.com/api/token', payload)
-      const response = await body.json()
+      const response = await fetch('https://accounts.spotify.com/api/token', payload).then(response => response.json())
 
       console.log(response)
 
@@ -60,36 +59,36 @@ const WrappedScreen = () => {
 
   }, [code])
 
-  useEffect(() => {
+  // useEffect(() => {
 
-    const getRefreshToken = async () => {
-      const payload = {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/x-www-form-urlencoded'
-        },
-        body: new URLSearchParams({
-          grant_type: 'refresh_token',
-          refresh_token: refreshToken,
-          client_id: CLIENT_ID
-        }),
-      }
-      const body = await fetch('https://accounts.spotify.com/api/token', payload)
-      const response = await body.json()
+  //   const getRefreshToken = async () => {
+  //     const payload = {
+  //       method: 'POST',
+  //       headers: {
+  //         'Content-Type': 'application/x-www-form-urlencoded'
+  //       },
+  //       body: new URLSearchParams({
+  //         grant_type: 'refresh_token',
+  //         refresh_token: refreshToken,
+  //         client_id: CLIENT_ID
+  //       }),
+  //     }
+  //     const body = await fetch('https://accounts.spotify.com/api/token', payload)
+  //     const response = await body.json()
   
-      localStorage.setItem('access_token', response.accessToken)
-      localStorage.setItem('refresh_token', response.refreshToken)
-      setAccessToken(response.access_token)
-      setRefreshToken(response.refresh_token)
-   }
+  //     localStorage.setItem('access_token', response.accessToken)
+  //     localStorage.setItem('refresh_token', response.refreshToken)
+  //     setAccessToken(response.access_token)
+  //     setRefreshToken(response.refresh_token)
+  //  }
    
-   const interval = setInterval(() => {
-    getRefreshToken()
-    console.log('refreshes every hour')
-  }, HOUR_MS);
+  //  const interval = setInterval(() => {
+  //   getRefreshToken()
+  //   console.log('refreshes every hour')
+  // }, HOUR_MS);
   
-    return () => clearInterval(interval) // This represents the unmount function, in which you need to clear your interval to prevent memory leaks.
-  }, [])
+  //   return () => clearInterval(interval) // This represents the unmount function, in which you need to clear your interval to prevent memory leaks.
+  // }, [])
 
   const handleLogout = () => {
     localStorage.removeItem('access_token')
