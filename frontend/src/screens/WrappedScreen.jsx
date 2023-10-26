@@ -1,6 +1,6 @@
 import React from 'react'
 import { useState, useEffect } from 'react'
-import { useNavigate } from 'react-router'
+import { redirect, useNavigate } from 'react-router-dom'
 import { Buffer } from 'buffer'
 
 import Wrapped from '../components/Wrapped'
@@ -14,7 +14,7 @@ const WrappedScreen = () => {
  
   const CLIENT_ID = import.meta.env.VITE_SPOTIFY_CLIENT_ID
   const CLIENT_SECRET = import.meta.env.VITE_SPOTIFY_CLIENT_SECRET
-  const REDIRECT_URI = import.meta.env.VITE_DEV_REDIRECT_URI
+  const REDIRECT_URI = import.meta.env.VITE_REDIRECT_URI
   const HOUR_MS = 60000 * 60
 
   useEffect(() => {
@@ -42,6 +42,9 @@ const WrappedScreen = () => {
 
       const response = await fetch('https://accounts.spotify.com/api/token', payload).then(response => response.json())
 
+      if (!response) {
+        return redirect('/')
+      }
       console.log(response)
 
       localStorage.setItem('access_token', response.access_token)
@@ -58,6 +61,12 @@ const WrappedScreen = () => {
     setRefreshToken(localStorage.getItem('refresh_token'))
 
   }, [code])
+
+  useEffect(() => {
+    if (accessToken === null) {
+      redirect('/')
+    }
+  }, [accessToken])
 
   // useEffect(() => {
 

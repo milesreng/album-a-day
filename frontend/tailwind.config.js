@@ -76,7 +76,7 @@ export default {
     extend: {
       fontFamily: {
         'mono': ['mono'],
-        'header': ['Bebas Neue', 'sans'],
+        'header': ['"Bebas Neue"', 'sans'],
         'content': ['Rubik', 'serif']
       },
     },
