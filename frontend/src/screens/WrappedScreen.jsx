@@ -14,7 +14,7 @@ const WrappedScreen = () => {
  
   const CLIENT_ID = import.meta.env.VITE_SPOTIFY_CLIENT_ID
   const CLIENT_SECRET = import.meta.env.VITE_SPOTIFY_CLIENT_SECRET
-  const REDIRECT_URI = import.meta.env.VITE_REDIRECT_URI
+  const REDIRECT_URI = import.meta.env.VITE_DEV_REDIRECT_URI
   const HOUR_MS = 60000 * 60
 
   useEffect(() => {
@@ -75,6 +75,8 @@ const WrappedScreen = () => {
   //     }
   //     const body = await fetch('https://accounts.spotify.com/api/token', payload)
   //     const response = await body.json()
+
+  //     console.log('refresh: ' + response)
   
   //     localStorage.setItem('access_token', response.accessToken)
   //     localStorage.setItem('refresh_token', response.refreshToken)

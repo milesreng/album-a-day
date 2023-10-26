@@ -9,7 +9,7 @@ const codeChallenge = base64encode(hashed)
 
 const HomeScreen = () => {
   const CLIENT_ID = import.meta.env.VITE_SPOTIFY_CLIENT_ID
-  const REDIRECT_URI = import.meta.env.VITE_REDIRECT_URI
+  const REDIRECT_URI = import.meta.env.VITE_DEV_REDIRECT_URI
   const auth_url = new URL(import.meta.env.VITE_AUTH_ENDPOINT)
 
   const scope = 'streaming user-read-email user-read-private user-top-read'
@@ -26,6 +26,11 @@ const HomeScreen = () => {
   }
 
   auth_url.search = new URLSearchParams(params).toString()
+
+  useEffect(() => {
+    window.localStorage.removeItem('access_token')
+    window.localStorage.removeItem('refresh_token')
+  })
 
   // const [accessToken, setAccessToken] = useState()
 

@@ -11,12 +11,13 @@ import './index.css'
 
 import HomeScreen from './screens/HomeScreen.jsx'
 import WrappedScreen from './screens/WrappedScreen.jsx'
+import ErrorScreen from './screens/ErrorScreen.jsx'
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path='/' element={<App />}>
       <Route index={true} path='/' element={<HomeScreen />} />
-      <Route index={true} path='/dashboard' element={<WrappedScreen />} />
+      <Route index={true} path='/dashboard' element={<WrappedScreen />} errorElement={<ErrorScreen />} />
     </Route>
   )
 )
