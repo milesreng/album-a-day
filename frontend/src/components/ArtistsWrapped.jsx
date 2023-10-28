@@ -30,7 +30,7 @@ const ArtistsWrapped = ({ token, time_range }) => {
   }, [token, time_range])
 
   return (
-    <div className='flex flex-wrap mx-auto bg-gunmetal-700 px-8 w-5/6 gap-2 md:w-2/3'>
+    <div className='flex flex-wrap mx-auto bg-gunmetal-700 px-8 pb-8 w-5/6 gap-4 md:w-2/3 justify-start'>
       {loading && <Loader />}
       {artists && artists.map((artist, idx) => (
         <Artist key={artist.id} artist={artist} rank={idx} />

@@ -3,6 +3,7 @@ import React from 'react'
 import { useState, useEffect } from 'react'
 import Loader from './Loader'
 import Track from './Track'
+import TrackThin from './TrackThin'
 
 const TracksWrapped = ({ token, time_range }) => {
   const [tracks, setTracks] = useState([])
@@ -30,11 +31,15 @@ const TracksWrapped = ({ token, time_range }) => {
     fetchData()
   }, [token, time_range])
 
+
   return (
     <div className='bg-gunmetal-700 w-5/6 md:w-2/3 mx-auto'>
-      {tracks && tracks.map((track, idx) => (
+      {/* {tracks && !thinLayout && tracks.map((track, idx) => (
         <Track key={track.id} track={track} rank={idx} />
-      ))}
+      ))} */}
+      {tracks && tracks.map((track, idx) => (
+          <TrackThin key={track.id} track={track} rank={idx} />
+        ))}
     </div>
   )
 }

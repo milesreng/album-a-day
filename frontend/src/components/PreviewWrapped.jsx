@@ -3,10 +3,11 @@
 /* eslint-disable react/prop-types */
 import React from 'react'
 import { useState, useEffect } from 'react'
-import TrackWidget from './TrackWidget'
-import ArtistWidget from './ArtistWidget'
+import Separator from '../assets/point-gunmetal.svg'
 
+import refresh from '../assets/refresh-light.svg'
 import RecommendedTrack from './RecommendedTrack'
+import TopArtistTrack from './TopArtistTrack'
 
 const PreviewWrapped = (props) => {
   const [artist, setArtist] = useState()
@@ -30,7 +31,6 @@ const PreviewWrapped = (props) => {
 
       setArtist(artist.items[0])
       setArtists(artist.items.slice(1,))
-      console.log(artists)
     }
     
     fetchData()
@@ -73,39 +73,79 @@ const PreviewWrapped = (props) => {
       searchParameters)
       .then(response => response.json())
       .then(data => {
-        console.log(data)
         setRecommended(data.tracks)
     })
+  }
+
+  const handleRefreshRecs = () => {
+    getRecommendedByArtist()
   }
 
   return (
     <div>
       {artist && (
         <div className='flex flex-col gap-12'>
-          <div className='flex flex-row w-3/4 md:w-1/2 mx-auto'>
-            <div className='flex flex-col bg-default-bg w-5/6 mx-auto px-8 pt-8 text-center'>
-              <div className='text-gunmetal-200'>
+          <div className='flex flex-row w-5/6 md:w-1/2 mx-auto'>
+            <div className='flex flex-col bg-default-bg w-5/6 mx-auto px-8 text-center'>
+              <p className='text-gunmetal-200 my-auto'>
                 @{props.user.id}
-              </div>
+              </p>
               <img className='mx-auto'
                 src={artist.images[0].url} alt={artist.name} />
-              <div className='text-gunmetal py-4'>
-                <p className='text-xl md:text-3xl'>{artist.name}</p>
-                <p className='font-header tracking-widest text-lg'>2023</p>
+              <div className='text-gunmetal'>
+                <p className='text-xl md:text-3xl text-content uppercase pt-4 pb-2'>{artist.name}</p>
+                <div className='flex flex-col my-auto text-gunmetal text-xs pb-4'>
+                  <div className='flex flex-row justify-evenly w-11/12 mx-auto'>
+                    {artistTracks && artistTracks.filter(track => track.artists.find(a => a.name === artist.name)).slice(0,3).map((track, idx) => (
+                      <><div key={track.id} className='flex flex-row text-center align-middle'>
+                        <p className='text-center uppercase tracking-wide font-content md:font-bold my-auto truncate'>
+                          {track.name.split('-')[0].split('(')[0]}
+                        </p>
+                      </div>
+                      {idx != 2 && (
+                      <img className='w-2'
+                        src={Separator} alt="" />
+                    )}
+                      </>
+                    ))}
+                  </div>
+                  <div className='flex flex-row justify-evenly w-11/12 mx-auto'>
+                  {artistTracks && artistTracks.filter(track => track.artists.find(a => a.name === artist.name)).slice(3,5).map((track, idx) => (
+                    <><div key={track.id} className='flex flex-row text-center align-middle'>
+                      <p className='text-center uppercase tracking-wide font-content md:font-bold text-xs my-auto truncate'>
+                        {track.name.split('-')[0].split('(')[0]}
+                      </p>
+                    </div>
+                    {idx != 1 && (
+                      <img className='w-2'
+                        src={Separator} alt="" />
+                    )}
+                    </>
+                  ))}
+
+                  </div>
+
+                </div>
               </div>
             </div>
-            <div className='w-1/6 flex flex-col justify-between'>
-              {artistTracks && artistTracks.filter(track => track.artists.find(a => a.name === artist.name)).slice(0, 6).map(track => (
-                <a key={track.id} href={track.external_urls.spotify} className='h-full'>
-                    <img className='my-auto h-full' src={track.album.images[0].url} alt="" />
-                </a>
+            {/* <div className='w-1/6 flex flex-col justify-between'>
+              {artistTracks && artistTracks.filter(track => track.artists.find(a => a.name === artist.name)).slice(0, 5).map(track => (
+                <TopArtistTrack key={track.id} track={track} />
               ))}
-
-            </div>
+            </div> */}
           </div>
           <div>
             {recommended && (
-                <h1 className='text-center mx-auto pb-4 font-content'>Users like you listen to:</h1>
+              <div className='flex flex-row gap-0'>
+                <h1 className='text-center mx-auto pb-8 font-content flex flex-row gap-8'>
+                  <button onClick={handleRefreshRecs}>
+                  <img 
+                    className='w-4 mx-auto'
+                    src={refresh} alt='refresh' />
+                  </button>
+                  Users like you listen to...
+                </h1>
+              </div>
               )}
             <div className='flex flex-wrap w-5/6 mx-auto gap-4 justify-evenly pb-12'>
               

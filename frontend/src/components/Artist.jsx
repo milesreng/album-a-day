@@ -3,7 +3,6 @@ import React from 'react'
 import Avatar from '../assets/avatar.jpg'
 
 const Artist = ({ artist, rank }) => {
-  console.log(artist)
   return (
     <a href={artist.external_urls.spotify} 
       className='flex flex-col basis-1/6 mx-auto hover:bg-gunmetal-500 pt-2 font-content text-sm font-thin'>

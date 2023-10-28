@@ -3,14 +3,21 @@ import React from 'react'
 // import { FaUser } from 'react-icons/fa'
 import { Link } from 'react-router-dom'
 
-const Header = ({ user }) => {
+const Header = ({ user, isLineup }) => {
   return (
     <div>
       {user && <div className='w-full flex flex-row justify-between p-4'>
-      <div className='my-auto pl-4 flex flex-row gap-12'>
-        <h1 className='text-lg md:text-4xl uppercase font-header'>
-          <Link to='/'><span>Spotify-Wrapped-Preview</span></Link>
+      <div className='my-auto pl-4 flex flex-row gap-8'>
+        <h1 className='text-lg md:text-4xl uppercase font-header my-auto'>
+          <Link to='/'>
+            Spotify-Wrapped-Preview
+          </Link>
         </h1>
+        {!isLineup && (<div className='text-xs my-auto border border-gunmetal-50 px-4 py-2 rounded-md uppercase'>
+          <Link to='/lineup'>
+            get my festival lineup
+          </Link>
+        </div>)}
         {/* <Link to='/'>back to home</Link> */}
       </div>
       <div className='flex flex-row gap-24'>
