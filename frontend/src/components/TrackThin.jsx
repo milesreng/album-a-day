@@ -5,14 +5,15 @@ const TrackThin = ({ track, rank }) => {
   return (
     <div className='w-5/6 mx-auto border-b border-gunmetal-400 py-2 md:py-4 hover:bg-gunmetal-700 font-content'>
       <div className='flex flex-row gap-4'>
-        <div className='my-auto'>
+        <div className='my-auto basis-1/12'>
           <p>{rank+1}</p>
         </div>
-        <div className='w-12'>
-          <img src={track.album.images[0].url} alt="" />
+        <div className='basis-1/6 aspect-square my-auto'>
+          <img className='w-full aspect-square'
+            src={track.album.images[0].url} alt="" />
         </div>
-        <div>
-          <h1 className='uppercase'>{track.name}</h1>
+        <div className='basis-2/3'>
+          <h1 className='uppercase text-xs sm:text-sm md:text-lg'>{track.name}</h1>
           <div className='text-xs md:text-sm font-thin'>
               {track.artists.map((artist, idx) => (
                 <span key={artist.id} className=''>

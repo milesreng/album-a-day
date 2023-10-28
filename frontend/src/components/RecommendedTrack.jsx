@@ -3,17 +3,24 @@ import React from 'react'
 
 const RecommendedTrack = ({ track }) => {
   return (
-    <a href={track.external_urls.spotify} 
-      className='sm:basis-1/4 md:basis-1/6 flex flex-col gap-1 font-content'>
-      <div className='w-50 md:w-40'>
-        <img className='overflow-hidden'
-        src={track.album.images[0].url} alt="" />
+    <div className='w-5/6 mx-auto border-b border-gunmetal-400 py-2 md:py-4 hover:bg-gunmetal-700 font-content'>
+      <div className='flex flex-row gap-4'>
+        <div className='basis-1/6 aspect-square my-auto'>
+          <img className='w-full aspect-square'
+            src={track.album.images[0].url} alt="" />
+        </div>
+        <div className='basis-2/3'>
+          <h1 className='uppercase text-xs sm:text-sm md:text-lg'>{track.name}</h1>
+          <div className='text-xs md:text-sm font-thin'>
+              {track.artists.map((artist, idx) => (
+                <span key={artist.id} className=''>
+                  {artist.name}{idx === track.artists.length - 1 ? '' : ', '}
+                </span>
+              ))}
+            </div>
+        </div>
       </div>
-      <div>
-        <p className='text-xs truncate w-40'>{track.name}</p>
-        <p className='text-xs truncate w-40'>{track.artists[0].name}</p>
-      </div>
-    </a>
+    </div>
   )
 }
 

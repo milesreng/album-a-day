@@ -2,7 +2,6 @@
 import React from 'react'
 import { useState, useEffect } from 'react'
 import Loader from './Loader'
-import Track from './Track'
 import TrackThin from './TrackThin'
 
 const TracksWrapped = ({ token, time_range }) => {

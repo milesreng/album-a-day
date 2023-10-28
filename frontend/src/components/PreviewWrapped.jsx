@@ -7,6 +7,7 @@ import Separator from '../assets/point-gunmetal.svg'
 
 import refresh from '../assets/refresh-light.svg'
 import RecommendedTrack from './RecommendedTrack'
+import TrackThin from './TrackThin'
 import TopArtistTrack from './TopArtistTrack'
 
 const PreviewWrapped = (props) => {
@@ -97,7 +98,8 @@ const PreviewWrapped = (props) => {
                 <div className='flex flex-col my-auto text-gunmetal text-xs pb-4'>
                   <div className='flex flex-row justify-evenly w-11/12 mx-auto'>
                     {artistTracks && artistTracks.filter(track => track.artists.find(a => a.name === artist.name)).slice(0,3).map((track, idx) => (
-                      <><div key={track.id} className='flex flex-row text-center align-middle'>
+                      <div key={track.id}>
+                        <div className='flex flex-row text-center align-middle'>
                         <p className='text-center uppercase tracking-wide font-content md:font-bold my-auto truncate'>
                           {track.name.split('-')[0].split('(')[0]}
                         </p>
@@ -106,12 +108,12 @@ const PreviewWrapped = (props) => {
                       <img className='w-2'
                         src={Separator} alt="" />
                     )}
-                      </>
+                      </div>
                     ))}
                   </div>
                   <div className='flex flex-row justify-evenly w-11/12 mx-auto'>
                   {artistTracks && artistTracks.filter(track => track.artists.find(a => a.name === artist.name)).slice(3,5).map((track, idx) => (
-                    <><div key={track.id} className='flex flex-row text-center align-middle'>
+                    <div key={track.id}><div className='flex flex-row text-center align-middle'>
                       <p className='text-center uppercase tracking-wide font-content md:font-bold text-xs my-auto truncate'>
                         {track.name.split('-')[0].split('(')[0]}
                       </p>
@@ -120,7 +122,7 @@ const PreviewWrapped = (props) => {
                       <img className='w-2'
                         src={Separator} alt="" />
                     )}
-                    </>
+                    </div>
                   ))}
 
                   </div>
