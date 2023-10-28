@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react'
 import { redirect } from 'react-router'
 
 import Header from '../components/Header'
+import Lineup from '../components/Lineup'
 
 const LineupScreen = () => {
   const [accessToken, setAccessToken] = useState()
@@ -48,24 +49,40 @@ const LineupScreen = () => {
     if (accessToken) {
       fetchData()
     }
-  }, [accessToken])
+  }, [accessToken, timeRange])
+
+  const handleSetShort = () => {
+    setTimeRange('short')
+  }
+
+  const handleSetMedium = () => {
+    setTimeRange('medium')
+  }
+
+  const handleSetLong = () => {
+    setTimeRange('long')
+  }
 
   return (
-    <div className='min-h-screen bg-gunmetal'>
+    <div className='min-h-screen bg-gunmetal flex flex-col w-full'>
       {user && <Header user={user} isLineup={true} />}
+      <div className='w-11/12 md:w-1/2 flex flex-row justify-evenly mx-auto py-4'>
+        <button onClick={handleSetShort}
+          className={`px-4 py-1 rounded-md ${timeRange === 'short' ? 'bg-gunmetal-500': ''}`}>
+          last 4 weeks
+        </button>
+        <button onClick={handleSetMedium}
+          className={`px-4 py-1 rounded-md ${timeRange === 'medium' ? 'bg-gunmetal-500': ''}`}>
+          last 6 months
+        </button>
+        <button  onClick={handleSetLong}
+          className={`px-4 py-1 rounded-md ${timeRange === 'long' ? 'bg-gunmetal-500': ''}`}>
+          all time
+        </button>
+      </div>
       {user && artists && (
-      <div className='w-1/2 mx-auto'>
-        <div>
-          {artists[0].name}
-        </div>
-        <div>
-          {artists.slice(1,11).map(artist => (
-            <div key={artist.id}>
-              {artist.name}
-            </div>
-          ))}
-        </div>
-      </div>)}
+        <Lineup user={user} artists={artists} />
+      )}
     </div>
   )
 }

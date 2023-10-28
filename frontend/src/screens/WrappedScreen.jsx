@@ -14,8 +14,7 @@ const WrappedScreen = () => {
  
   const CLIENT_ID = import.meta.env.VITE_SPOTIFY_CLIENT_ID
   const CLIENT_SECRET = import.meta.env.VITE_SPOTIFY_CLIENT_SECRET
-  const REDIRECT_URI = import.meta.env.VITE_DEV_REDIRECT_URI
-  const HOUR_MS = 60000 * 60
+  const REDIRECT_URI = import.meta.env.VITE_REDIRECT_URI
 
   useEffect(() => {
 
@@ -53,7 +52,7 @@ const WrappedScreen = () => {
       setRefreshToken(response.refresh_token)
     } 
 
-    if (localStorage.getItem('access_token') === null) {
+    if (code && localStorage.getItem('access_token') === null) {
       getToken(code)
     }
 

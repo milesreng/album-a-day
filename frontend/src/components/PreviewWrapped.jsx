@@ -77,9 +77,9 @@ const PreviewWrapped = (props) => {
     })
   }
 
-  const handleRefreshRecs = () => {
-    getRecommendedByArtist()
-  }
+  // const handleRefreshRecs = () => {
+  //   getRecommendedByArtist()
+  // }
 
   return (
     <div>
@@ -135,7 +135,7 @@ const PreviewWrapped = (props) => {
             </div> */}
           </div>
           <div>
-            {recommended && (
+            {/* {recommended && (
               <div className='flex flex-row gap-0'>
                 <h1 className='text-center mx-auto pb-8 font-content flex flex-row gap-8'>
                   <button onClick={handleRefreshRecs}>
@@ -146,7 +146,7 @@ const PreviewWrapped = (props) => {
                   Users like you listen to...
                 </h1>
               </div>
-              )}
+              )} */}
             <div className='flex flex-wrap w-5/6 mx-auto gap-4 justify-evenly pb-12'>
               
               {recommended && recommended.map(track => (
