@@ -11,6 +11,7 @@ import './index.css'
 
 import HomeScreen from './screens/HomeScreen.jsx'
 import WrappedScreen from './screens/WrappedScreen.jsx'
+import LineupScreen from './screens/LineupScreen.jsx'
 
 // add routes, we can use local storage to enable navigation and redirect if fails
 
@@ -19,6 +20,7 @@ const router = createBrowserRouter(
     <Route path='/' element={<App />}>
       <Route index={true} path='/' element={<HomeScreen />} />
       <Route index={true} path='/dashboard' element={<WrappedScreen />} />
+      <Route index={true} path='/lineup' element={<LineupScreen />} />
     </Route>
   )
 )
