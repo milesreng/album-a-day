@@ -29,6 +29,7 @@ const LineupScreen = () => {
     async function fetchData () {
       const artist = await fetch(`https://api.spotify.com/v1/me/top/artists?time_range=${timeRange || 'short'}_term&limit=30`, authParameters)
       .then(response => response.json())
+      .catch(error => redirect('/nodata'))
 
       if (!artist) {
         redirect('/')

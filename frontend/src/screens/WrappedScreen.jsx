@@ -14,7 +14,7 @@ const WrappedScreen = () => {
  
   const CLIENT_ID = import.meta.env.VITE_SPOTIFY_CLIENT_ID
   const CLIENT_SECRET = import.meta.env.VITE_SPOTIFY_CLIENT_SECRET
-  const REDIRECT_URI = import.meta.env.VITE_DEV_REDIRECT_URI
+  const REDIRECT_URI = import.meta.env.VITE_REDIRECT_URI
 
   useEffect(() => {
 
@@ -41,7 +41,7 @@ const WrappedScreen = () => {
 
       const response = await fetch('https://accounts.spotify.com/api/token', payload)
         .then(response => response.json())
-        .catch(error => console.log(error.message))
+        .catch(error => console.log('ERROR' + error.message))
 
       if (!response) {
         return redirect('/')

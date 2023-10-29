@@ -16,7 +16,6 @@ const PreviewWrapped = (props) => {
   const access_token = props.token
 
   useEffect(() => {
-    console.log('hello')
 
     const fetchData = async () => {
       const authParameters = {
@@ -35,15 +34,15 @@ const PreviewWrapped = (props) => {
       setArtists(artist.items.slice(1,))
     }
     
-    // fetchData()
-    // getTopByArtist()
+    fetchData()
+    getTopByArtist()
   }, [])
 
-  // useEffect(() => {
-  //   if (artist) {
-  //     getRecommendedByArtist()
-  //   }
-  // }, [artist])
+  useEffect(() => {
+    if (artist) {
+      getRecommendedByArtist()
+    }
+  }, [artist])
 
   const getTopByArtist = async () => {
     const searchParameters = {
@@ -87,39 +86,32 @@ const PreviewWrapped = (props) => {
     <div>
       {artist && (
         <div className='flex flex-col gap-12'>
-          <div className='flex flex-row w-5/6 md:w-1/2 mx-auto'>
-            <div className='flex flex-col bg-default-bg w-5/6 mx-auto px-8 text-center'>
+          <div className='flex flex-row w-11/12 md:w-1/2 mx-auto'>
+            <div className='flex flex-col bg-default-bg pt-8 pb-2 w-full sm:w-5/6 mx-auto px-8 text-center'>
               <img className='mx-auto'
                 src={artist.images[0].url} alt={artist.name} />
               <div className='text-gunmetal'>
                 <p className='text-xl md:text-3xl text-content uppercase pt-4 pb-2'>{artist.name}</p>
-                <div className='flex flex-col my-auto text-gunmetal text-xs pb-4'>
+                <div className='text-[10px] sm:text-[12px] flex flex-col my-auto text-gunmetal pb-4'>
                   <div className='flex flex-row justify-evenly w-11/12 mx-auto'>
                     {artistTracks && artistTracks.filter(track => track.artists.find(a => a.name === artist.name)).slice(0,3).map((track, idx) => (
-                      <div key={track.id}>
-                        <div className='flex flex-row text-center align-middle'>
+                      <div key={track.id} className='flex flex-row text-center align-middle'>
                         <p className='text-center uppercase tracking-wide font-content md:font-bold my-auto truncate'>
                           {track.name.split('-')[0].split('(')[0]}
                         </p>
-                      </div>
-                      {idx != 2 && (
+                      {/* {idx != 2 && (
                       <img className='w-2'
                         src={Separator} alt="" />
-                    )}
+                    )} */}
                       </div>
                     ))}
                   </div>
                   <div className='flex flex-row justify-evenly w-11/12 mx-auto'>
                   {artistTracks && artistTracks.filter(track => track.artists.find(a => a.name === artist.name)).slice(3,5).map((track, idx) => (
-                    <div key={track.id}><div className='flex flex-row text-center align-middle'>
-                      <p className='text-center uppercase tracking-wide font-content md:font-bold text-xs my-auto truncate'>
+                    <div key={track.id} className='flex flex-row text-center align-middle'>
+                      <p className='text-center uppercase tracking-wide font-content md:font-bold my-auto truncate'>
                         {track.name.split('-')[0].split('(')[0]}
                       </p>
-                    </div>
-                    {idx != 1 && (
-                      <img className='w-2'
-                        src={Separator} alt="" />
-                    )}
                     </div>
                   ))}
 

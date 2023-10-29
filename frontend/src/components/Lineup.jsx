@@ -9,8 +9,7 @@ const Lineup = ({ user, artists }) => {
   const OPENAI_ENDPOINT = import.meta.env.VITE_OPENAI_API_ENDPOINT
 
   const [aiResponse, setAiResponse] = useState()
-
-  const artistNames = artists.map(artist => artist.name)
+  // const artistNames = artists.map(artist => artist.name)
 
   useEffect(() => {
 
@@ -66,7 +65,7 @@ const Lineup = ({ user, artists }) => {
       {aiResponse && (
         <p>{aiResponse}</p>
       )}
-      <div className={`w-[380px] sm:w-[450px] md:w-[600px] mx-auto aspect-square uppercase flex flex-col tracking-widest font-header bg-default-bg gap-2 md:gap-6 pt-4 md:pt-12 px-2 ${aiResponse ? 'text-gunmetal-400' : 'text-gunmetal'}`}>
+      <div className={`w-[380px] sm:w-[450px] md:w-[600px] mx-auto aspect-square justify-around uppercase flex flex-col tracking-widest font-header bg-default-bg gap-2 md:gap-6 pt-4 md:pt-12 px-2 ${aiResponse ? 'text-gunmetal-400' : 'text-gunmetal'}`}>
         <div className='text-2xl text-center lowercase font-content'>
           {aiResponse ? '' : `${user.display_name}'s Festival`}
         </div>
