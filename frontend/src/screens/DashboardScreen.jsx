@@ -1,11 +1,9 @@
+import { Buffer } from 'buffer'
 import React from 'react'
 import { useState, useEffect } from 'react'
-import { redirect, useNavigate } from 'react-router-dom'
-import { Buffer } from 'buffer'
+import { redirect, useNavigate } from 'react-router'
 
-import Wrapped from '../components/Wrapped'
-
-const WrappedScreen = () => {
+const DashboardScreen = () => {
   const navigate = useNavigate()
 
   const [code, setCode] = useState()
@@ -68,28 +66,11 @@ const WrappedScreen = () => {
       redirect('/')
     }
   }, [accessToken])
-
-
-  const handleLogout = () => {
-    localStorage.removeItem('access_token')
-    
-    setAccessToken('')
-    
-
-    navigate('/')
-  }
-
   return (
-    <div className='flex flex-col min-h-screen w-full'>
-      {accessToken && <Wrapped token={accessToken} />}
-      <div className='w-1/3 md:w-1/6 mx-auto my-8'>
-        <button onClick={handleLogout}
-          className='text-center w-full bg-spotify-green uppercase rounded-full py-1'>
-            logout
-        </button>
-      </div>
+    <div>
+      {accessToken && 'access'}
     </div>
   )
 }
 
-export default WrappedScreen
+export default DashboardScreen

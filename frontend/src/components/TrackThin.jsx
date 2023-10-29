@@ -1,5 +1,5 @@
+/* eslint-disable react/prop-types */
 import React from 'react'
-import SpotifyLight from '../assets/spotify-light.svg'
 
 const TrackThin = ({ track, rank }) => {
   return (

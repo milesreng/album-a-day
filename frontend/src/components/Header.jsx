@@ -6,7 +6,6 @@ import stats from '../assets/stats-light.svg'
 import Anon from '../assets/avatar.jpg'
 
 const Header = ({ user, isLineup }) => {
-  console.log(user)
   return (
     <div>
       {user && <div className='w-full flex flex-row justify-between p-4'>
