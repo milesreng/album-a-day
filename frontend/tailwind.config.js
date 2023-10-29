@@ -79,6 +79,10 @@ export default {
         'header': ['"Bebas Neue"', 'sans'],
         'content': ['Rubik', 'serif']
       },
+      backgroundImage: {
+        'festival': "url('images/festivalbg.jpeg')",
+        'retro': "url('images/bgretro.jpeg')"
+      }
     },
   },
   plugins: [],

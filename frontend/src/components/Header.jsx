@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 import stats from '../assets/stats-light.svg'
 import Anon from '../assets/avatar.jpg'
 
-const Header = ({ user, isLineup }) => {
+const Header = ({ user }) => {
   return (
     <div>
       {user && <div className='w-full flex flex-row justify-between p-4'>
@@ -22,15 +22,6 @@ const Header = ({ user, isLineup }) => {
               </div>
             </Link>
           </h1>
-        <div className='h-full my-auto'>
-          {!isLineup && (
-            <div className='my-auto text-xs text-center border border-gunmetal-50 px-2 md:px-4 py-2 rounded-md uppercase bg-gunmetal-900 hover:font-bold'>
-              <Link to='/lineup'>
-                view my festival lineup
-              </Link>
-            </div>
-          )}
-        </div>
         {/* <Link to='/'>back to home</Link> */}
       </div>
       <div className='flex flex-row gap-24 px-2'>

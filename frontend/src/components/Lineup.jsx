@@ -4,7 +4,7 @@ import React from 'react'
 import { useState, useEffect } from 'react'
 import axios from 'axios'
 
-const Lineup = ({ user, artists }) => {
+const Lineup = ({ user, artists, type }) => {
   const OPENAI_KEY = import.meta.env.VITE_OPENAI_API_KEY
   const OPENAI_ENDPOINT = import.meta.env.VITE_OPENAI_API_ENDPOINT
 
@@ -65,28 +65,28 @@ const Lineup = ({ user, artists }) => {
       {aiResponse && (
         <p>{aiResponse}</p>
       )}
-      <div className={`w-[380px] sm:w-[450px] md:w-[600px] mx-auto aspect-square justify-around uppercase flex flex-col tracking-widest font-header bg-default-bg gap-2 md:gap-6 pt-4 md:pt-12 px-2 ${aiResponse ? 'text-gunmetal-400' : 'text-gunmetal'}`}>
-        <div className='text-2xl text-center lowercase font-content'>
+      <div className={`w-[380px] sm:w-[450px] md:w-[600px] mx-auto aspect-square bg-cover justify-around uppercase flex flex-col tracking-widest font-header gap-2 md:gap-6 pt-4 md:pt-12 px-2 ${type === 'default' ? 'bg-default-bg text-gunmetal' : ' bg-gunmetal text-default-bg '}`}>
+        <div className={`text-2xl text-center lowercase font-content ${type === 'default' ? 'drop-shadow-[0_1.2px_1.2px_rgba(255,255,255,0.8)]' : 'drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)]'}`}>
           {aiResponse ? '' : `${user.display_name}'s Festival`}
         </div>
-        <div className='text-5xl md:text-6xl text-center'>
+        <div className={`text-5xl md:text-6xl text-center ${type === 'default' ? 'drop-shadow-[0_1.2px_1.2px_rgba(255,255,255,0.8)]' : 'drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)]'}`}>
           {artists[0].name}
         </div>
-        <div className='flex flex-wrap md:flex-row text-center justify-evenly text-2xl md:text-4xl'>
+        <div className={`flex flex-wrap md:flex-row text-center justify-evenly text-2xl md:text-4xl ${type === 'default' ? 'drop-shadow-[0_1.2px_1.2px_rgba(255,255,255,0.8)]' : 'drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)]'}`}>
           {artists.slice(1,4).map(artist => (
             <div key={artist.id}>
               {artist.name}
             </div>
           ))}
         </div>
-        <div className='text-[16px] sm:text-[22px] md:text-[28px] flex flex-wrap flex-row gap-0 md:gap-4 text-center justify-evenly  lowercase tracking-tight md:w-11/12 mx-auto'>
+        <div className={`text-[16px] sm:text-[22px] md:text-[28px] flex flex-wrap flex-row gap-0 md:gap-4 text-center justify-evenly  lowercase tracking-tight md:w-11/12 mx-auto ${type === 'default' ? 'drop-shadow-[0_1.2px_1.2px_rgba(255,255,255,0.8)]' : 'drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)]'}`}>
           {artists.slice(5,21).map(artist => (
             <div key={artist.id} className='py-1 px-2'>
               {artist.name}
             </div>
           ))}
         </div>
-      <div className=' bg-default-bg text-gunmetal-400 text-center text-xs underline py-2'>
+      <div className={`text-shadow text-center text-xs underline py-2 ${type === 'default' ? 'text-gunmetal-400 drop-shadow-[0_1.2px_1.2px_rgba(255,255,255,0.8)]' : 'text-default-bg drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)]'}`}>
           <a href='https://wrappedpreview.netlify.app'>
             https://wrappedpreview.netlify.app
           </a>

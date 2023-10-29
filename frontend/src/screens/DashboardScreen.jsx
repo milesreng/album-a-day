@@ -1,7 +1,9 @@
 import { Buffer } from 'buffer'
 import React from 'react'
 import { useState, useEffect } from 'react'
-import { redirect, useNavigate } from 'react-router'
+import { useNavigate, redirect } from 'react-router'
+
+import Dashboard from '../components/Dashboard'
 
 const DashboardScreen = () => {
   const navigate = useNavigate()
@@ -60,15 +62,24 @@ const DashboardScreen = () => {
     
 
   }, [code])
+  
+  const handleLogout = () => {
+    localStorage.removeItem('access_token')
+    
+    setAccessToken('')
+    navigate('/')
+  }
 
-  useEffect(() => {
-    if (accessToken === null) {
-      redirect('/')
-    }
-  }, [accessToken])
+
   return (
-    <div>
-      {accessToken && 'access'}
+    <div className='min-h-screen w-full'>
+      {accessToken && <Dashboard accessToken={accessToken} />}
+      <div className='w-1/3 md:w-1/6 mx-auto my-8'>
+        <button onClick={handleLogout}
+          className='text-center w-full bg-spotify-green uppercase rounded-full py-1'>
+            logout
+        </button>
+      </div>
     </div>
   )
 }

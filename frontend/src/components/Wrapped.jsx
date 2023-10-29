@@ -65,7 +65,7 @@ const Wrapped = (props) => {
 
   return (
     <div className='bg-gunmetal'>
-      {user && <Header user={user} isLineup={false} />}
+      {user && <Header user={user} />}
       <div className='h-6 mb-4 md:px-4 text-sm flex flex-row mx-auto w-5/6 border-t border-b border-gunmetal-500 shadow-lg md:w-1/2 justify-between'>
         <button onClick={handleViewPreview}>
           <p className='px-4 md:px-8 hover:bg-gunmetal-500 transition-all duration-200 hover:cursor-pointer'>Preview</p>
