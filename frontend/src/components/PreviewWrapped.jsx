@@ -7,8 +7,6 @@ import Separator from '../assets/point-gunmetal.svg'
 
 import refresh from '../assets/refresh-light.svg'
 import RecommendedTrack from './RecommendedTrack'
-import TrackThin from './TrackThin'
-import TopArtistTrack from './TopArtistTrack'
 
 const PreviewWrapped = (props) => {
   const [artist, setArtist] = useState()
@@ -18,31 +16,34 @@ const PreviewWrapped = (props) => {
   const access_token = props.token
 
   useEffect(() => {
-    const authParameters = {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': 'Bearer ' + access_token
-      }
-    }
+    console.log('hello')
 
-    async function fetchData () {
+    const fetchData = async () => {
+      const authParameters = {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer ' + access_token
+        }
+      }
+
       const artist = await fetch('https://api.spotify.com/v1/me/top/artists?time_range=medium_term&limit=5', authParameters)
       .then(response => response.json())
+      .catch(error => console.log(error.message))
 
       setArtist(artist.items[0])
       setArtists(artist.items.slice(1,))
     }
     
-    fetchData()
-    getTopByArtist()
-  }, [access_token])
+    // fetchData()
+    // getTopByArtist()
+  }, [])
 
-  useEffect(() => {
-    if (artist) {
-      getRecommendedByArtist()
-    }
-  }, [artist])
+  // useEffect(() => {
+  //   if (artist) {
+  //     getRecommendedByArtist()
+  //   }
+  // }, [artist])
 
   const getTopByArtist = async () => {
     const searchParameters = {
@@ -88,9 +89,6 @@ const PreviewWrapped = (props) => {
         <div className='flex flex-col gap-12'>
           <div className='flex flex-row w-5/6 md:w-1/2 mx-auto'>
             <div className='flex flex-col bg-default-bg w-5/6 mx-auto px-8 text-center'>
-              <p className='text-gunmetal-200 my-auto'>
-                @{props.user.id}
-              </p>
               <img className='mx-auto'
                 src={artist.images[0].url} alt={artist.name} />
               <div className='text-gunmetal'>
@@ -149,7 +147,7 @@ const PreviewWrapped = (props) => {
                 </h1>
               </div>
               )} */}
-            <div className='flex flex-wrap w-5/6 mx-auto gap-4 justify-evenly pb-12'>
+            <div className='flex flex-col w-5/6 mx-auto gap-4 justify-evenly pb-12'>
               
               {recommended && recommended.map(track => (
                 <div key={track.id}>
@@ -157,19 +155,6 @@ const PreviewWrapped = (props) => {
                 </div>
               ))}
             </div>
-              {/* <div className='flex flex-row mx-auto w-3/4 justify-between'>
-                {artists && artists.map((artist, idx) => (
-                  <ArtistWidget key={artist.id} artist={artist} rank={idx} />
-                ))}
-              </div>
-            <button onClick={getTopByArtist}>your favorite tracks by {artist.name}:</button>
-            <div className='flex flex-wrap mx-auto w-11/12 justify-between'>
-              {artistTracks && artistTracks.filter(track => track.artists.find(a => a.name === artist.name)).slice(0, 12).map((track, idx) => (
-                <TrackWidget key={track.id} track={track} artistID={artist.id} rank={idx+1} />
-              ))}
-            </div> */}
-  
-  
           </div>
           </div>
       )}

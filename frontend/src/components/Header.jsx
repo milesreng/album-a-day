@@ -13,7 +13,7 @@ const Header = ({ user, isLineup }) => {
           <h1 className='text-lg md:text-3xl uppercase font-header my-auto flex flex-row gap-4 md:basis-1/4'>
           
             {/* <span className='hidden md:flex'>Spotify Wrapped Preview</span> */}
-            <Link to='/'>
+            <Link to='/dashboard'>
               <div className='flex flex-row gap-4 justify-center align-middle'>
                 <img className='w-6 md:w-8'
                   src={stats} alt="" />

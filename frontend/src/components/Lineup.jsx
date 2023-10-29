@@ -59,7 +59,7 @@ const Lineup = ({ user, artists }) => {
     // }
 
     // fetchData()
-  }, [])
+  }, [artists])
 
   return (
     <div>
