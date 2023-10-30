@@ -8,7 +8,6 @@ const Dashboard = ({ accessToken }) => {
   const [user, setUser] = useState()
   const [timeRange, setTimeRange] = useState()
   const [artists, setArtists] = useState()
-  const [bgType, setBgType] = useState()
 
   useEffect(() => {
     const authParameters = {
@@ -48,14 +47,6 @@ const Dashboard = ({ accessToken }) => {
     setTimeRange('long')
   }
 
-  const handleSetDefault = () => {
-    setBgType('default')
-  }
-
-  const handleSetRetro = () => {
-    setBgType('retro')
-  }
-
   return (
     <div className='h-full w-full'>
       { user && <Header user={user} />}
@@ -74,11 +65,7 @@ const Dashboard = ({ accessToken }) => {
         </button>
       </div>
       <div>
-        <div>
-          <button onClick={handleSetDefault}>default</button>
-          <button onClick={handleSetRetro}>retro</button>
-        </div>
-        { artists && <Lineup user={user} artists={artists} type={bgType || 'default'} />}
+        { artists && <Lineup user={user} artists={artists} />}
       </div>
     </div>
   )

@@ -23,6 +23,9 @@ const Header = ({ user }) => {
             </Link>
           </h1>
         {/* <Link to='/'>back to home</Link> */}
+        <Link to='/stats'>
+          to stats
+        </Link>
       </div>
       <div className='flex flex-row gap-24 px-2'>
         <a className='flex flex-row gap-4'

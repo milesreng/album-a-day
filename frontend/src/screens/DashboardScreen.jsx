@@ -10,7 +10,6 @@ const DashboardScreen = () => {
 
   const [code, setCode] = useState()
   const [accessToken, setAccessToken] = useState()
-  
  
   const CLIENT_ID = import.meta.env.VITE_SPOTIFY_CLIENT_ID
   const CLIENT_SECRET = import.meta.env.VITE_SPOTIFY_CLIENT_SECRET
@@ -46,7 +45,7 @@ const DashboardScreen = () => {
       if (!response) {
         return redirect('/')
       }
-      console.log(response)
+      // console.log(response)
 
       localStorage.setItem('access_token', response.access_token)
       
@@ -62,14 +61,13 @@ const DashboardScreen = () => {
     
 
   }, [code])
-  
+
   const handleLogout = () => {
     localStorage.removeItem('access_token')
     
     setAccessToken('')
     navigate('/')
   }
-
 
   return (
     <div className='min-h-screen w-full'>
