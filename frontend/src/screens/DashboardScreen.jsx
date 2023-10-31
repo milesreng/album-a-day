@@ -70,7 +70,7 @@ const DashboardScreen = () => {
   }
 
   return (
-    <div className='min-h-screen w-full'>
+    <div className='min-h-screen w-full dark:bg-gunmetal'>
       {accessToken && <Dashboard accessToken={accessToken} />}
       <div className='w-1/3 md:w-1/6 mx-auto my-8'>
         <button onClick={handleLogout}

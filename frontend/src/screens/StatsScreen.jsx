@@ -45,6 +45,7 @@ const StatsScreen = () => {
   return (
     <div>
       {user && <Header user={user} />}
+      
     </div>
   )
 }

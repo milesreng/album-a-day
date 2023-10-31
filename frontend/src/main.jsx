@@ -11,7 +11,8 @@ import './index.css'
 
 import HomeScreen from './screens/HomeScreen.jsx'
 import DashboardScreen from './screens/DashboardScreen.jsx'
-import StatsScreen from './screens/StatsScreen.jsx'
+import TracksScreen from './screens/TracksScreen.jsx'
+import ArtistsScreen from './screens/ArtistsScreen.jsx'
 
 import ErrorScreen from './screens/ErrorScreen.jsx'
 
@@ -22,8 +23,8 @@ const router = createBrowserRouter(
     <Route path='/' element={<App />}>
       <Route index={true} path='/' element={<HomeScreen />} errorElement={<ErrorScreen />} />
       <Route index={true} path='/dashboard' element={<DashboardScreen />} errorElement={<ErrorScreen />} />
-      <Route index={true} path='/stats' element={<StatsScreen />} errorElement={<ErrorScreen />} />
-      <Route index={true} path='/nodata' element={<ErrorScreen />} errorElement={<ErrorScreen />} />
+      <Route index={true} path='/tracks' element={<TracksScreen />} errorElement={<ErrorScreen />} />
+      <Route index={true} path='/artists' element={<ArtistsScreen />} errorElement={<ErrorScreen />} />
     </Route>
   )
 )
