@@ -70,6 +70,7 @@ export default {
         900: '#a38160'
       },
       'spotify-green': '#1ED760',
+      white: colors.white,
       slate: colors.slate,
       gray: colors.gray,
       black: colors.black
@@ -77,8 +78,8 @@ export default {
     extend: {
       fontFamily: {
         'mono': ['mono'],
-        'header': ['"Bebas Neue"', 'sans'],
-        'content': ['Rubik', 'serif']
+        'header': ['"Geologica"', 'sans'],
+        'content': ['Roboto', 'serif']
       },
       backgroundImage: {
         'festival': "url('images/festivalbg.jpeg')",

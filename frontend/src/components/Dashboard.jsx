@@ -2,44 +2,46 @@ import React from 'react'
 import { useState, useEffect } from 'react'
 
 import Header from './Header'
-import Lineup from './Lineup'
+import Wrapped from './Wrapped'
 
 const Dashboard = ({ accessToken }) => {
+
   const [user, setUser] = useState()
-  const [timeRange, setTimeRange] = useState()
   const [artists, setArtists] = useState()
+  const [tracks, setTracks] = useState()
+
+  const [timeRange, setTimeRange] = useState()
+
+  const authParameters = {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + accessToken
+    }
+  }
 
   useEffect(() => {
-    const authParameters = {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': 'Bearer ' + accessToken
-      }
-    }
 
-    async function fetchData () {
+    const fetchData = async () => {
       const user = await fetch('https://api.spotify.com/v1/me', authParameters)
       .then(response => response.json())
       .catch(error => console.log(error.message))
 
       setUser(user)
 
-      const artists = await fetch(`https://api.spotify.com/v1/me/top/artists?time_range=${timeRange || 'short'}_term&limit=30`, authParameters)
-      .then(response => response.json())
-      .catch(error => console.log('error'))
 
-      setArtists(artists.items)
     }
 
     fetchData()
-  }, [timeRange])
+
+    setTimeRange('short')
+  }, [])
 
   const handleSetShort = () => {
     setTimeRange('short')
   }
 
-  const handleSetMed = () => {
+  const handleSetMedium = () => {
     setTimeRange('medium')
   }
 
@@ -50,23 +52,23 @@ const Dashboard = ({ accessToken }) => {
   return (
     <div className='h-full w-full'>
       { user && <Header user={user} />}
-      <div className='flex flex-row w-1/2 mx-auto justify-evenly my-4'>
+      <div className='w-3/4 md:w-1/3 mx-auto text-center flex flex-row justify-between font-content pb-4 text-xs md:text-sm'>
         <button onClick={handleSetShort}
-          className={`basis-1/4 px-4 py-1 rounded-lg ${(timeRange === 'short' || !timeRange) ? 'bg-gunmetal-700' : 'bg-gunmetal-900'}`}>
+          className='border-t border-b border-gunmetal px-2 md:px-4 hover:bg-gunmetal-50'>
           last 4 weeks
         </button>
-        <button onClick={handleSetMed}
-          className={`basis-1/4 px-4 py-1 rounded-lg ${(timeRange === 'medium' || !timeRange) ? 'bg-gunmetal-700' : 'bg-gunmetal-900'}`}>
+        <button onClick={handleSetMedium}
+          className='border-t border-b border-gunmetal px-2 md:px-4 hover:bg-gunmetal-50'>
           last 6 months
         </button>
         <button onClick={handleSetLong}
-          className={`basis-1/4 px-4 py-1 rounded-lg ${(timeRange === 'long' || !timeRange) ? 'bg-gunmetal-700' : 'bg-gunmetal-900'}`}>
+          className='border-t border-b border-gunmetal px-2 md:px-4 hover:bg-gunmetal-50'>
           all time
         </button>
       </div>
-      <div>
-        { artists && <Lineup user={user} artists={artists} />}
-      </div>
+      {timeRange && (
+        <Wrapped accessToken={accessToken} timeRange={timeRange} />
+      )}
     </div>
   )
 }

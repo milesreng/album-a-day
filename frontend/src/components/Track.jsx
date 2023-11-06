@@ -1,10 +1,11 @@
+/* eslint-disable react/prop-types */
 import React from 'react'
 
 const Track = ({ accessToken, track, rank }) => {
 
   return (
-    <div className='border-b py-2 border-gunmetal-400 flex flex-row w-full h-16 text-gunmetal dark:text-default-bg'>
-      <div className='h-full flex flex-col justify-around w-12'>
+    <div className='border-b py-2 border-gunmetal-50 hover:bg-default-bg transition-all duration-200 flex flex-row w-full h-16 text-gunmetal dark:text-default-bg'>
+      <div className='h-full flex flex-col justify-around w-10 md:w-12'>
         <p className='px-4'>{rank + 1}</p>
       </div>
       <div className='h-full aspect-square w-1/6 md:w-1/12'>
@@ -16,7 +17,7 @@ const Track = ({ accessToken, track, rank }) => {
         <span className='text-xs sm:text-sm md:text-md truncate text-ellipsis w-5/6'>
           {track.name}
         </span>
-        <span className='text-[10px] sm:text-xs md:text-sm'>
+        <span className='text-[10px] sm:text-xs'>
         {track.artists.map((artist, idx) => (
           <span key={artist.id}>
             {artist.name}

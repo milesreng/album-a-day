@@ -70,20 +70,20 @@ const TracksScreen = () => {
       {user && <Header user={user} />}
       <div className='flex flex-col w-5/6 md:w-2/3 lg:w-1/2 mx-auto'>
         <div className='flex flex-row text-gunmetal justify-between w-full text-xs'>
-          <button className={`rounded-t-md py-1 basis-1/3 text-gunmetal dark:text-default-bg ${(timeRange !== 'short' && timeRange) ? 'bg-default-bg dark:bg-gunmetal' : 'bg-gunmetal-50 dark:bg-gunmetal-500'}`}
+          <button className={`rounded-t-md py-2 border-t border-r border-l border-default-bg dark:border-gunmetal hover:dark:border-default-bg hover:border-gunmetal basis-1/3 text-gunmetal dark:text-default-bg ${(timeRange === 'short' || !timeRange) ? 'bg-white dark:bg-gunmetal' : 'bg-default-bg dark:bg-gunmetal-500'}`}
             onClick={handleSetShort}>
             last 4 weeks
           </button>
-          <button className={`rounded-t-md py-1 basis-1/3 text-gunmetal dark:text-default-bg ${timeRange !== 'medium' ? 'bg-default-bg dark:bg-gunmetal' : 'bg-gunmetal-100 dark:bg-gunmetal-500'}`}
+          <button className={`rounded-t-md py-2 border-t border-r border-l border-default-bg dark:border-gunmetal hover:dark:border-default-bg hover:border-gunmetal basis-1/3 text-gunmetal dark:text-default-bg ${(timeRange === 'medium') ? 'bg-white dark:bg-gunmetal' : 'bg-default-bg dark:bg-gunmetal-500'}`}
             onClick={handleSetMedium}>
             last 6 months
           </button>
-          <button  className={`rounded-t-md py-1 basis-1/3 text-gunmetal dark:text-default-bg ${timeRange !== 'long' ? 'bg-default-bg dark:bg-gunmetal' : 'bg-gunmetal-100 dark:bg-gunmetal-500'}`}
+          <button className={`rounded-t-md py-2 border-t border-r border-l border-default-bg dark:border-gunmetal hover:dark:border-default-bg hover:border-gunmetal basis-1/3 text-gunmetal dark:text-default-bg ${(timeRange === 'long') ? 'bg-white dark:bg-gunmetal' : 'bg-default-bg dark:bg-gunmetal-500'}`}
             onClick={handleSetLong}>
             all time
           </button>
         </div>
-        <div className='w-full flex flex-col bg-default-bg shadow-xl dark:bg-gunmetal text-gunmetal'>
+        <div className='w-full flex flex-col bg-white shadow-xl dark:bg-gunmetal text-gunmetal'>
         {tracks && tracks.map((track, idx) => (
           <Track key={idx} accessToken={accessToken} track={track} rank={idx} />
         ))}

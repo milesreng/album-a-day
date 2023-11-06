@@ -8,25 +8,30 @@ import Anon from '../assets/avatar.jpg'
 
 const Header = ({ user }) => {
   return (
-    <div className='dark:text-default-bg'>
+    <div className={`dark:text-default-bg`}>
       {user && <div className='w-full flex flex-row justify-between p-4'>
-      <div className='my-auto pl-4 flex flex-row gap-4 md:w-3/4'>
+      <div className='my-auto pl-4 flex flex-row gap-4 md:w-1/4'>
         
-          <h1 className='text-lg md:text-3xl uppercase font-header my-auto flex flex-row gap-4 md:basis-1/3 w-6'>
+          <h1 className='text-lg md:text-3xl uppercase font-header my-auto flex flex-row gap-4 w-6'>
           
             {/* <span className='hidden md:flex'>Spotify Wrapped Preview</span> */}
             <Link to='/dashboard'>
-              <div className='flex flex-row gap-4 justify-center align-middle md:basis-1/2'>
+              <div className='flex flex-row gap-4 justify-center align-middle'>
                 <img className='w-6 md:w-8 dark:flex hidden'
                   src={statsLight} alt="" />
                 <img className='w-6 md:w-8 dark:hidden flex'
                   src={stats} alt="" />
-                  <span className='hidden md:flex w-full'>spotify stats</span>
+                  <span className='hidden md:block w-48 tracking-widest text-4xl text-gunmetal'>statify</span>
               </div>
             </Link>
           </h1>
-        {/* <Link to='/'>back to home</Link> */}
-        <div className='flex flex-row md:justify-between md:w-1/2 mx-auto uppercase font-content my-auto text-sm md:text-md'>
+      </div>
+        <div className='flex flex-row md:justify-between md:w-1/4 mx-auto uppercase font-content my-auto text-sm md:text-md'>
+        <Link to='/dashboard'>
+            <div className='underline px-2 md:px-0 hover:shadow-lg rounded-md md:w-24 py-1 text-center transition-all duration-300'>
+              dashboard
+            </div>
+          </Link>
           <Link to='/tracks'>
             <div className='underline px-2 md:px-0 hover:shadow-lg rounded-md md:w-24 py-1 text-center transition-all duration-300'>
               tracks
@@ -37,14 +42,8 @@ const Header = ({ user }) => {
               artists
             </div>
           </Link>
-          <Link to='/genres'>
-            <div className='underline hover:shadow-lg px-2 md:px-0 rounded-md md:w-24 py-1 text-center transition-all duration-300'>
-              genres
-            </div>
-          </Link>
         </div>
-      </div>
-      <div className='flex flex-row gap-24 px-2'>
+      <div className='flex flex-row px-2 md:basis-1/4 justify-end'>
         <a className='flex flex-row gap-4'
           target='_blank'
           rel='noreferrer'

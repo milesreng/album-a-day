@@ -20,11 +20,11 @@ const App = () => {
 
   return (
     <div className={`font-sans flex flex-col h-full w-screen min-h-screen ${darkMode ? 'dark bg-gunmetal border-gunmetal-500' : 'bg-default-bg border-gunmetal'}`}>
-      <button className='w-1/3 mx-auto py-2 border-b'
+      {/* <button className='w-1/3 mx-auto py-2 border-b'
         onClick={handleToggleMode}>
-        <img className='w-4 md:w-6 mx-auto'
+        <img className='w-4 mx-auto'
           src={darkMode ? LightMode : DarkMode} alt="" />
-      </button>
+      </button> */}
       <div className='h-full'>
         <Outlet />
       </div>

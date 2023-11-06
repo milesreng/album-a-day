@@ -81,22 +81,22 @@ const ArtistsScreen = () => {
        onClick={handleSetName}>
         {hasName ? 'hide ' : 'see'} artist names
       </button>
-      <div className='flex flex-col w-5/6 md:w-2/3 lg:w-1/2 mx-auto'>
+      <div className='flex flex-col w-5/6 md:w-2/3 lg:w-1/2 mx-auto px-4'>
         <div className='flex flex-row text-gunmetal justify-between w-full text-xs'>
-          <button className={`rounded-t-md border-t border-r border-l border-default-bg dark:border-gunmetal hover:dark:border-default-bg hover:border-gunmetal py-1 basis-1/3 text-gunmetal dark:text-default-bg ${(timeRange !== 'short' && timeRange) ? 'bg-default-bg dark:bg-gunmetal' : 'bg-gunmetal-50 dark:bg-gunmetal-500'}`}
+          <button className={`rounded-t-md py-2 border-t border-r border-l border-default-bg dark:border-gunmetal hover:dark:border-default-bg hover:border-gunmetal basis-1/3 text-gunmetal dark:text-default-bg ${(timeRange === 'short' || !timeRange) ? 'bg-white dark:bg-gunmetal' : 'bg-default-bg dark:bg-gunmetal-500'}`}
             onClick={handleSetShort}>
             last 4 weeks
           </button>
-          <button className={`rounded-t-md border-t border-r border-l border-default-bg dark:border-gunmetal hover:dark:border-default-bg hover:border-gunmetal py-1 basis-1/3 text-gunmetal dark:text-default-bg ${(timeRange !== 'medium' && timeRange) ? 'bg-default-bg dark:bg-gunmetal' : 'bg-gunmetal-50 dark:bg-gunmetal-500'}`}
+          <button className={`rounded-t-md border-t border-r border-l border-default-bg dark:border-gunmetal hover:dark:border-default-bg hover:border-gunmetal py-2 basis-1/3 text-gunmetal dark:text-default-bg ${(timeRange === 'medium') ? 'bg-white dark:bg-gunmetal' : 'bg-default-bg dark:bg-gunmetal-500'}`}
             onClick={handleSetMedium}>
             last 6 months
           </button>
-          <button  className={`rounded-t-md border-t border-r border-l border-default-bg dark:border-gunmetal hover:dark:border-default-bg hover:border-gunmetal  py-1 basis-1/3 text-gunmetal dark:text-default-bg ${(timeRange !== 'long' && timeRange) ? 'bg-default-bg dark:bg-gunmetal' : 'bg-gunmetal-50 dark:bg-gunmetal-500'}`}
+          <button  className={`rounded-t-md border-t border-r border-l border-default-bg dark:border-gunmetal hover:dark:border-default-bg hover:border-gunmetal  py-2 basis-1/3 text-gunmetal dark:text-default-bg ${(timeRange === 'long') ? 'bg-white dark:bg-gunmetal' : 'bg-default-bg dark:bg-gunmetal-500'}`}
             onClick={handleSetLong}>
             all time
           </button>
         </div>
-        <div className='w-full flex flex-wrap bg-default-bg text-gunmetal dark:bg-gunmetal dark:text-default-bg p-2 justify-evenly md:justify-between gap-4'>
+        <div className='w-full flex flex-wrap bg-white justify-evenly md:justify-between gap-4 px-4 py-4'>
         {artists && artists.map((artist, idx) => (
           <Artist key={idx} accessToken={accessToken} artist={artist} rank={idx} hasName={hasName} />
         ))}
