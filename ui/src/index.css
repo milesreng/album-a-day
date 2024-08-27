@@ -1,0 +1,50 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+/* general */
+
+:root {
+  @apply w-screen bg-stone-50 min-h-screen
+}
+
+.link {
+  @apply underline text-blue-700
+}
+
+.body-container {
+  @apply px-4 h-full flex flex-col bg-stone-200 dark:bg-stone-600
+}
+
+/* navbar */
+
+.navbar {
+  @apply bg-stone-600 flex w-full justify-between px-4 py-2 text-stone-50 dark:bg-stone-800
+}
+
+.navbar-component {
+  @apply my-auto
+}
+
+.navbar-right .navbar-link {
+    @apply border-2 border-stone-400 rounded-full px-4 py-1 hover:bg-stone-400 transition-all
+}
+
+/* login */
+
+.auth-form {
+  @apply bg-stone-200 dark:bg-stone-300 my-auto p-12 w-5/6 md:w-1/2 mx-auto flex flex-col gap-4
+}
+
+.auth-form .form-input {
+  @apply flex w-full justify-between
+}
+
+.auth-form .form-input input {
+  @apply basis-3/4
+}
+
+.auth-form .submit-button {
+  @apply mx-auto bg-stone-600 text-white px-8 rounded-md py-1
+}
